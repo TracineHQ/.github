@@ -6,7 +6,7 @@ Tracine builds open-source tools that make AI coding agents safer, more transpar
 
 | | Project | Description | Install |
 |---|---------|-------------|---------|
-| **Guard** | [guard](https://github.com/TracineHQ/guard) | Security hooks for Claude Code — validates commands, protects credentials, enforces git safety | `/plugin marketplace add TracineHQ/guard` |
+| **Guard** | [guard](https://github.com/TracineHQ/guard) | Security hooks for Claude Code — path-aware credential, protected-file, and commit-safety guardrails; ships a decision-log CLI for observability | `/plugin marketplace add TracineHQ/guard` |
 | **Convo** | [convo](https://github.com/TracineHQ/convo) | Claude Code plugin + CLI — auto-indexes session logs to SQLite, FTS5 search, slash commands, and a history-recall skill | `/plugin marketplace add TracineHQ/convo` or `pipx install tracine-convo` |
 | **Triage** | tracine-triage | AI-assisted SAST triage — prioritizes security findings with LLM analysis | *Coming soon* |
 
