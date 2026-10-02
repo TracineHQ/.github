@@ -1,21 +1,33 @@
 ## Infrastructure for safe, observable AI development
 
-Tracine builds open-source tools that make AI coding agents safer, more transparent, and easier to trust in production workflows.
+Open-source tools for Claude Code. Stop the bad tool call before it runs, query what the agent actually did, and tell a real eval gain from noise.
+
+### Install
+
+Inside Claude Code:
+
+```
+/plugin marketplace add TracineHQ/plugins
+/plugin install guard@tracine
+/plugin install convo@tracine
+/plugin install eval-kit@tracine
+```
+
+The convo plugin drives the `convo` CLI, so install that too: `pipx install tracine-convo`. guard's query CLI is optional: `pipx install tracine-guard`.
 
 ### Products
 
-| | Project | Description | Install |
-|---|---------|-------------|---------|
-| **Guard** | [guard](https://github.com/TracineHQ/guard) | Security hooks for Claude Code — path-aware credential, protected-file, and commit-safety guardrails; ships a decision-log CLI for observability | `/plugin marketplace add TracineHQ/guard` |
-| **Convo** | [convo](https://github.com/TracineHQ/convo) | Claude Code plugin + CLI — auto-indexes session logs to SQLite, FTS5 search, slash commands, and a history-recall skill | `/plugin marketplace add TracineHQ/convo` or `pipx install tracine-convo` |
-| **Triage** | tracine-triage | AI-assisted SAST triage — prioritizes security findings with LLM analysis | *Coming soon* |
+| Project | What it does | Status |
+|---|---|---|
+| [guard](https://github.com/TracineHQ/guard) | Safety hooks for Claude Code. Catches `rm -rf`, credential exfiltration, force-pushes and edits to protected files, and writes every decision to a JSONL log you can query. Pure Python stdlib. | Available |
+| [convo](https://github.com/TracineHQ/convo) | Session analytics for Claude Code. Indexes your session logs into SQLite for full-text search, tool-call analytics and session inspection. Pure Python stdlib. | Available |
+| [eval-kit](https://github.com/TracineHQ/eval-kit) | Eval statistics for Claude Code. Sizes the runs before you test, picks Welch's or a paired t-test, and says "can't tell yet" when the data can't support a call. Zero-dependency JS and a scipy-backed Python twin, cross-validated in CI. | Beta |
+| triage | Planned: LLM-assisted triage for static analysis findings. Not built yet. | Coming soon |
 
-### Philosophy
+### Why
 
-- **Safe by default** — Pre-built guardrails that validate every tool call before execution
-- **Observable** — Query what your AI agent actually did, not what it said it did
-- **Zero dependencies** — Pure Python stdlib. No bloat, no supply chain risk
+- **Pre-execution, not post-mortem.** guard's hooks fire before the tool call runs.
+- **Receipts, not recall.** Every guard decision lands in JSONL, every session in SQLite.
+- **Math, not vibes.** eval-kit sizes the runs and checks its math against scipy in CI.
 
-### Links
-
-[tracine.dev](https://tracine.dev) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+[tracine.dev](https://tracine.dev) · [Plugin marketplace](https://github.com/TracineHQ/plugins) · Apache-2.0
